@@ -1,0 +1,30 @@
+# Documentation (local only)
+docs/
+
+# OS files
+.DS_Store
+Thumbs.db
+__MACOSX/
+
+# Node modules
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Azure deployment info
+azure-deployment-info.json
