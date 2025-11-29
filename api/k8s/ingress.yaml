@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mindx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - phucdh.mindx.com.vn
+      secretName: mindx-tls-secret
+  rules:
+    - host: phucdh.mindx.com.vn
+      http:
+        paths:
+          # API routes - no rewrite, pass path as-is
+          - path: /health
+            pathType: Exact
+            backend:
+              service:
+                name: mindx-api-service
+                port:
+                  number: 80
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: mindx-api-service
+                port:
+                  number: 80
+          # React Frontend - catch all other routes
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mindx-web-service
+                port:
+                  number: 80

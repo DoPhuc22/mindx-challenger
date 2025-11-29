@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mindx-web
+  labels:
+    app: mindx-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mindx-web
+  template:
+    metadata:
+      labels:
+        app: mindx-web
+    spec:
+      containers:
+        - name: mindx-web
+          image: mindxphucdhacr.azurecr.io/mindx-week1-web:v1.1
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          livenessProbe:
+            httpGet:
+              path: /nginx-health
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /nginx-health
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      imagePullSecrets:
+        - name: acr-secret
