@@ -1,79 +1,91 @@
+import { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
-import "./Dashboard.css";
 
 const Dashboard = () => {
   const { user, accessToken } = useAuth();
+  const [copied, setCopied] = useState(false);
 
   if (!user) {
     return null;
   }
 
+  const copyToken = () => {
+    if (accessToken) {
+      navigator.clipboard.writeText(accessToken);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   return (
     <div className="dashboard">
-      <h2>🔒 Protected Dashboard</h2>
-      <p className="dashboard-subtitle">
-        This page is only visible to authenticated users
-      </p>
-
-      <div className="dashboard-content">
-        <div className="dashboard-section">
-          <h3>👤 Your Profile</h3>
-          <div className="profile-grid">
-            {user.name && (
-              <div className="profile-item">
-                <span className="profile-label">Name</span>
-                <span className="profile-value">{user.name}</span>
+      <div className="card card-dashboard">
+        <h2>🔒 Protected Dashboard</h2>
+        <div className="dashboard-grid">
+          {/* Profile Card */}
+          <div className="dashboard-card">
+            <div className="profile-header">
+              <div className="profile-avatar">
+                {user.picture ? (
+                  <img src={user.picture} alt="Avatar" />
+                ) : (
+                  (user.name || user.email || "U")[0].toUpperCase()
+                )}
               </div>
-            )}
-            {user.email && (
-              <div className="profile-item">
-                <span className="profile-label">Email</span>
-                <span className="profile-value">{user.email}</span>
+              <div className="profile-info">
+                <h3>{user.name || "User"}</h3>
+                <p>{user.email}</p>
               </div>
-            )}
-            {user.given_name && (
-              <div className="profile-item">
-                <span className="profile-label">First Name</span>
-                <span className="profile-value">{user.given_name}</span>
-              </div>
-            )}
-            {user.family_name && (
-              <div className="profile-item">
-                <span className="profile-label">Last Name</span>
-                <span className="profile-value">{user.family_name}</span>
-              </div>
-            )}
-            <div className="profile-item">
-              <span className="profile-label">User ID</span>
-              <span className="profile-value profile-id">{user.sub}</span>
+            </div>
+            <div className="profile-details">
+              {user.given_name && (
+                <p>
+                  <span>First Name</span>
+                  <strong>{user.given_name}</strong>
+                </p>
+              )}
+              {user.family_name && (
+                <p>
+                  <span>Last Name</span>
+                  <strong>{user.family_name}</strong>
+                </p>
+              )}
+              <p>
+                <span>User ID</span>
+                <code>{user.sub?.substring(0, 20)}...</code>
+              </p>
             </div>
           </div>
-        </div>
 
-        <div className="dashboard-section">
-          <h3>🔑 Access Token</h3>
-          <div className="token-display">
-            <code>
-              {accessToken ? `${accessToken.substring(0, 50)}...` : "No token"}
-            </code>
+          {/* Token Card */}
+          <div className="dashboard-card">
+            <h3>🔑 Access Token</h3>
+            <div className="token-display">
+              <code>
+                {accessToken
+                  ? `${accessToken.substring(0, 80)}...`
+                  : "No token"}
+              </code>
+            </div>
+            <button className="btn-copy" onClick={copyToken}>
+              {copied ? "✅ Copied!" : "📋 Copy Full Token"}
+            </button>
           </div>
-          <p className="token-info">
-            This token is used to authenticate API requests to protected
-            endpoints.
-          </p>
-        </div>
 
-        <div className="dashboard-section">
-          <h3>🛡️ Protected API Test</h3>
-          <p>Your authentication status allows access to:</p>
-          <ul className="api-list">
-            <li>
-              <code>GET /api/profile</code> - Get your profile from backend
-            </li>
-            <li>
-              <code>GET /auth/userinfo</code> - Get user info from OpenID
-            </li>
-          </ul>
+          {/* Protected APIs Card */}
+          <div className="dashboard-card">
+            <h3>🛡️ Protected Endpoints</h3>
+            <ul className="api-list">
+              <li>
+                <span className="method">GET</span>
+                <code>/api/profile</code>
+              </li>
+              <li>
+                <span className="method">GET</span>
+                <code>/auth/userinfo</code>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
