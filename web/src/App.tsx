@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { useAuth } from './auth/AuthContext'
+import Dashboard from './components/Dashboard'
 import './App.css'
 
 interface ApiInfo {
@@ -17,6 +19,7 @@ interface HealthStatus {
 }
 
 function App() {
+  const { user, isAuthenticated, isLoading: authLoading, login, logout } = useAuth()
   const [apiInfo, setApiInfo] = useState<ApiInfo | null>(null)
   const [health, setHealth] = useState<HealthStatus | null>(null)
   const [loading, setLoading] = useState(true)
@@ -52,11 +55,45 @@ function App() {
   return (
     <div className="container">
       <header className="header">
-        <h1>🚀 MindX Week 1</h1>
-        <p className="subtitle">Full-Stack App on Azure Cloud</p>
+        <div className="header-content">
+          <div>
+            <h1>🚀 MindX Week 1</h1>
+            <p className="subtitle">Full-Stack App on Azure Cloud</p>
+          </div>
+          <div className="auth-section">
+            {authLoading ? (
+              <span className="auth-loading">Loading...</span>
+            ) : isAuthenticated && user ? (
+              <div className="user-info">
+                <span className="user-name">👤 {user.name || user.email || 'User'}</span>
+                <button className="btn btn-logout" onClick={logout}>
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <button className="btn btn-login" onClick={login}>
+                🔐 Login with MindX
+              </button>
+            )}
+          </div>
+        </div>
       </header>
 
       <main className="main">
+        {/* Protected Dashboard - Only show when authenticated */}
+        {isAuthenticated && user && <Dashboard />}
+
+        {/* Login Prompt - Show when not authenticated */}
+        {!isAuthenticated && !authLoading && (
+          <div className="card card-login-prompt">
+            <h2>🔐 Welcome to MindX Week 1</h2>
+            <p>Please login to access the protected dashboard and features.</p>
+            <button className="btn btn-login btn-large" onClick={login}>
+              Login with MindX
+            </button>
+          </div>
+        )}
+
         {/* Health Status Card */}
         <div className="card">
           <h2>📊 API Health Status</h2>

@@ -31,6 +31,14 @@ spec:
                 name: mindx-api-service
                 port:
                   number: 80
+          # Auth routes - forward to API
+          - path: /auth(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: mindx-api-service
+                port:
+                  number: 80
           # React Frontend - catch all other routes
           - path: /
             pathType: Prefix
