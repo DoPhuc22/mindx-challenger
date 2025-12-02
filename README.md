@@ -348,7 +348,7 @@ kubectl describe ingress mindx-ingress
 
 ## 👤 Author
 
-**Phúc Đặng Hoàng**  
+**Đỗ Hồng Phúc**  
 MindX Technology School - Onboarding Week 1
 
 ## 📅 Timeline
