@@ -1,5 +1,9 @@
 .dashboard {
-  background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 217, 255, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 136, 0.1),
+    rgba(0, 217, 255, 0.1)
+  );
   border: 1px solid rgba(0, 255, 136, 0.3);
   border-radius: 16px;
   padding: 2rem;
@@ -66,7 +70,7 @@
 }
 
 .profile-id {
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
   font-size: 0.85rem;
   color: #00d9ff;
 }
@@ -81,7 +85,7 @@
 
 .token-display code {
   color: #00ff88;
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
   font-size: 0.85rem;
   word-break: break-all;
 }
@@ -115,7 +119,7 @@
   .dashboard-content {
     grid-template-columns: 1fr;
   }
-  
+
   .profile-item {
     flex-direction: column;
     align-items: flex-start;

@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { useAuth } from './auth/AuthContext'
-import Dashboard from './components/Dashboard'
-import './App.css'
+import { useState, useEffect } from "react";
+import { useAuth } from "./auth/AuthContext";
+import Dashboard from "./components/Dashboard";
+import "./App.css";
 
 interface ApiInfo {
   service: string;
@@ -19,38 +19,44 @@ interface HealthStatus {
 }
 
 function App() {
-  const { user, isAuthenticated, isLoading: authLoading, login, logout } = useAuth()
-  const [apiInfo, setApiInfo] = useState<ApiInfo | null>(null)
-  const [health, setHealth] = useState<HealthStatus | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const {
+    user,
+    isAuthenticated,
+    isLoading: authLoading,
+    login,
+    logout,
+  } = useAuth();
+  const [apiInfo, setApiInfo] = useState<ApiInfo | null>(null);
+  const [health, setHealth] = useState<HealthStatus | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [infoRes, healthRes] = await Promise.all([
-          fetch('/api/info'),
-          fetch('/health')
-        ])
-        
+          fetch("/api/info"),
+          fetch("/health"),
+        ]);
+
         if (!infoRes.ok || !healthRes.ok) {
-          throw new Error('API request failed')
+          throw new Error("API request failed");
         }
 
-        const infoData = await infoRes.json()
-        const healthData = await healthRes.json()
-        
-        setApiInfo(infoData)
-        setHealth(healthData)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch API')
-      } finally {
-        setLoading(false)
-      }
-    }
+        const infoData = await infoRes.json();
+        const healthData = await healthRes.json();
 
-    fetchData()
-  }, [])
+        setApiInfo(infoData);
+        setHealth(healthData);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to fetch API");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="container">
@@ -65,7 +71,9 @@ function App() {
               <span className="auth-loading">Loading...</span>
             ) : isAuthenticated && user ? (
               <div className="user-info">
-                <span className="user-name">👤 {user.name || user.email || 'User'}</span>
+                <span className="user-name">
+                  👤 {user.name || user.email || "User"}
+                </span>
                 <button className="btn btn-logout" onClick={logout}>
                   Logout
                 </button>
@@ -94,8 +102,12 @@ function App() {
             <div className="status-grid">
               <div className="status-item">
                 <span className="label">Status</span>
-                <span className={`value ${health.status === 'healthy' ? 'healthy' : 'unhealthy'}`}>
-                  {health.status === 'healthy' ? '✅' : '❌'} {health.status}
+                <span
+                  className={`value ${
+                    health.status === "healthy" ? "healthy" : "unhealthy"
+                  }`}
+                >
+                  {health.status === "healthy" ? "✅" : "❌"} {health.status}
                 </span>
               </div>
               <div className="status-item">
@@ -108,7 +120,9 @@ function App() {
               </div>
               <div className="status-item">
                 <span className="label">Uptime</span>
-                <span className="value">{Math.floor(health.uptime / 60)} min</span>
+                <span className="value">
+                  {Math.floor(health.uptime / 60)} min
+                </span>
               </div>
             </div>
           ) : null}
@@ -123,14 +137,24 @@ function App() {
             <p className="error">❌ {error}</p>
           ) : apiInfo ? (
             <div className="info-content">
-              <p><strong>Service:</strong> {apiInfo.service}</p>
-              <p><strong>Version:</strong> {apiInfo.version}</p>
-              <p><strong>Description:</strong> {apiInfo.description}</p>
+              <p>
+                <strong>Service:</strong> {apiInfo.service}
+              </p>
+              <p>
+                <strong>Version:</strong> {apiInfo.version}
+              </p>
+              <p>
+                <strong>Description:</strong> {apiInfo.description}
+              </p>
               <div className="endpoints">
                 <strong>Available Endpoints:</strong>
                 <ul>
                   {Object.entries(apiInfo.endpoints).map(([name, path]) => (
-                    <li key={name}><code>{name}: {path}</code></li>
+                    <li key={name}>
+                      <code>
+                        {name}: {path}
+                      </code>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -175,7 +199,7 @@ function App() {
         <p className="author">By Phuc Do</p>
       </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

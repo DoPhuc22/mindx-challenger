@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   min-height: 100vh;
   color: #fff;
@@ -102,14 +102,22 @@ body {
 /* Profile Card */
 .card-profile {
   grid-column: 1 / -1;
-  background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 255, 136, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 217, 255, 0.1),
+    rgba(0, 255, 136, 0.1)
+  );
   border: 1px solid rgba(0, 255, 136, 0.3);
 }
 
 /* Login Prompt Card */
 .card-login-prompt {
   grid-column: 1 / -1;
-  background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(147, 51, 234, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 217, 255, 0.1),
+    rgba(147, 51, 234, 0.1)
+  );
   border: 1px solid rgba(0, 217, 255, 0.3);
   text-align: center;
   padding: 3rem 2rem;
@@ -266,7 +274,7 @@ body {
   background: rgba(0, 217, 255, 0.1);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
   color: #00d9ff;
 }
 
@@ -315,15 +323,15 @@ body {
   .header h1 {
     font-size: 2rem;
   }
-  
+
   .main {
     grid-template-columns: 1fr;
   }
-  
+
   .tech-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .status-grid {
     grid-template-columns: 1fr;
   }
