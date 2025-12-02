@@ -83,17 +83,6 @@ function App() {
         {/* Protected Dashboard - Only show when authenticated */}
         {isAuthenticated && user && <Dashboard />}
 
-        {/* Login Prompt - Show when not authenticated */}
-        {!isAuthenticated && !authLoading && (
-          <div className="card card-login-prompt">
-            <h2>🔐 Welcome to MindX Week 1</h2>
-            <p>Please login to access the protected dashboard and features.</p>
-            <button className="btn btn-login btn-large" onClick={login}>
-              Login with MindX
-            </button>
-          </div>
-        )}
-
         {/* Health Status Card */}
         <div className="card">
           <h2>📊 API Health Status</h2>
