@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mindx-web
-          image: mindxphucdhacr.azurecr.io/mindx-week1-web:v2.5
+          image: mindxphucdhacr.azurecr.io/mindx-week1-web:v3.0
           ports:
             - containerPort: 80
           resources:
