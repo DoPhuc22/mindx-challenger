@@ -105,7 +105,7 @@ cd web && npm install && npm run dev
 
 ## 👤 Author
 
-**Phúc Đặng Hoàng** - MindX Technology School
+**Đỗ Hồng Phúc** - MindX Technology School
 
 ---
 
