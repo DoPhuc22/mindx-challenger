@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mindx-api
-          image: mindxphucdhacr.azurecr.io/mindx-week1-api:v2.1
+          image: mindxphucdhacr.azurecr.io/mindx-week1-api:v2.3
           ports:
             - containerPort: 3000
           resources:
@@ -63,5 +63,10 @@ spec:
                 secretKeyRef:
                   name: oidc-credentials
                   key: FRONTEND_URL
+            - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: appinsights-secret
+                  key: connection-string
       imagePullSecrets:
         - name: acr-secret

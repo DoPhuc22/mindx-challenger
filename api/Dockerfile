@@ -1,6 +1,6 @@
 # Multi-stage Dockerfile for Node.js/TypeScript API
 # Stage 1: Build stage
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ COPY src ./src
 RUN npm run build
 
 # Stage 2: Production stage
-FROM node:18-alpine AS production
+FROM node:20-alpine AS production
 
 WORKDIR /app
 
