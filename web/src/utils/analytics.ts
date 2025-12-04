@@ -69,7 +69,7 @@ export const trackError = (errorType: string, errorMessage: string) => {
 // Set user ID for tracking (after login)
 export const setUserId = (userId: string) => {
   if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("config", "G-XXXXXXXXXX", {
+    window.gtag("config", "G-W0JQ0W6X0W", {
       user_id: userId,
     });
   }
