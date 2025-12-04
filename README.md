@@ -8,26 +8,26 @@ A full-stack JavaScript/TypeScript application deployed on Azure Kubernetes Serv
 
 ## ✅ Acceptance Criteria
 
-| # | Criteria | Status |
-|---|----------|--------|
-| 1 | Backend API via HTTPS endpoint | ✅ |
-| 2 | Frontend React via HTTPS domain | ✅ |
-| 3 | HTTPS enforced | ✅ |
-| 4 | OpenID authentication integrated | ✅ |
-| 5 | Login/logout via OpenID | ✅ |
-| 6 | Protected routes after login | ✅ |
-| 7 | Backend validates OpenID token | ✅ |
-| 8 | Azure Cloud infrastructure | ✅ |
-| 9 | Deployment scripts committed | ✅ |
-| 10 | Documentation provided | ✅ |
+| #   | Criteria                         | Status |
+| --- | -------------------------------- | ------ |
+| 1   | Backend API via HTTPS endpoint   | ✅     |
+| 2   | Frontend React via HTTPS domain  | ✅     |
+| 3   | HTTPS enforced                   | ✅     |
+| 4   | OpenID authentication integrated | ✅     |
+| 5   | Login/logout via OpenID          | ✅     |
+| 6   | Protected routes after login     | ✅     |
+| 7   | Backend validates OpenID token   | ✅     |
+| 8   | Azure Cloud infrastructure       | ✅     |
+| 9   | Deployment scripts committed     | ✅     |
+| 10  | Documentation provided           | ✅     |
 
 ## 📚 Documentation
 
-| Document | Description |
-|----------|-------------|
-| [Setup Guide](docs/SETUP.md) | Local development & environment setup |
-| [Deployment Guide](docs/DEPLOYMENT.md) | Azure AKS deployment instructions |
-| [Auth Flow](docs/AUTH-FLOW.md) | OpenID Connect authentication details |
+| Document                               | Description                           |
+| -------------------------------------- | ------------------------------------- |
+| [Setup Guide](docs/SETUP.md)           | Local development & environment setup |
+| [Deployment Guide](docs/DEPLOYMENT.md) | Azure AKS deployment instructions     |
+| [Auth Flow](docs/AUTH-FLOW.md)         | OpenID Connect authentication details |
 
 ## 🏗️ Architecture
 
@@ -63,16 +63,16 @@ A full-stack JavaScript/TypeScript application deployed on Azure Kubernetes Serv
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Frontend | React 19, TypeScript, Vite |
-| Backend | Node.js, Express, TypeScript |
-| Container | Docker (multi-stage builds) |
-| Orchestration | Azure Kubernetes Service |
-| Registry | Azure Container Registry |
-| Ingress | NGINX + cert-manager |
-| TLS | Let's Encrypt |
-| Auth | OpenID Connect |
+| Layer         | Technology                   |
+| ------------- | ---------------------------- |
+| Frontend      | React 19, TypeScript, Vite   |
+| Backend       | Node.js, Express, TypeScript |
+| Container     | Docker (multi-stage builds)  |
+| Orchestration | Azure Kubernetes Service     |
+| Registry      | Azure Container Registry     |
+| Ingress       | NGINX + cert-manager         |
+| TLS           | Let's Encrypt                |
+| Auth          | OpenID Connect               |
 
 ## 📁 Project Structure
 
@@ -109,4 +109,4 @@ cd web && npm install && npm run dev
 
 ---
 
-*Built with ❤️ for MindX Onboarding Week 1*
+_Built with ❤️ for MindX Onboarding Week 1_

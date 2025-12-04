@@ -70,7 +70,7 @@ function App() {
               Full-Stack App on Azure Cloud
             </p>
           </div>
-          
+
           <div className="flex items-center gap-3">
             {authLoading ? (
               <div className="flex items-center gap-2 text-slate-400">
@@ -85,10 +85,7 @@ function App() {
                 <span className="text-emerald-400 font-medium hidden sm:block">
                   {user.name || user.email || "User"}
                 </span>
-                <button
-                  onClick={logout}
-                  className="btn-outline text-sm"
-                >
+                <button onClick={logout} className="btn-outline text-sm">
                   Logout
                 </button>
               </div>
@@ -104,7 +101,6 @@ function App() {
       {/* Main Content */}
       <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-6 lg:py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
-          
           {/* Dashboard - Full Width when authenticated */}
           {isAuthenticated && user && (
             <div className="col-span-full">
@@ -117,7 +113,7 @@ function App() {
             <h2 className="text-lg lg:text-xl font-semibold text-cyan-400 mb-4 flex items-center gap-2">
               <span className="text-2xl">📊</span> API Health Status
             </h2>
-            
+
             {loading ? (
               <div className="flex items-center gap-3 text-slate-400">
                 <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
@@ -130,22 +126,40 @@ function App() {
             ) : health ? (
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white/5 rounded-xl p-4 border border-white/5">
-                  <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Status</p>
-                  <p className={`font-semibold flex items-center gap-2 ${health.status === "healthy" ? "text-emerald-400" : "text-red-400"}`}>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">
+                    Status
+                  </p>
+                  <p
+                    className={`font-semibold flex items-center gap-2 ${
+                      health.status === "healthy"
+                        ? "text-emerald-400"
+                        : "text-red-400"
+                    }`}
+                  >
                     {health.status === "healthy" ? "✅" : "❌"} {health.status}
                   </p>
                 </div>
                 <div className="bg-white/5 rounded-xl p-4 border border-white/5">
-                  <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Version</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">
+                    Version
+                  </p>
                   <p className="font-semibold text-white">{health.version}</p>
                 </div>
                 <div className="bg-white/5 rounded-xl p-4 border border-white/5">
-                  <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Environment</p>
-                  <p className="font-semibold text-white">{health.environment}</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">
+                    Environment
+                  </p>
+                  <p className="font-semibold text-white">
+                    {health.environment}
+                  </p>
                 </div>
                 <div className="bg-white/5 rounded-xl p-4 border border-white/5">
-                  <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Uptime</p>
-                  <p className="font-semibold text-white">{Math.floor(health.uptime / 60)} min</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">
+                    Uptime
+                  </p>
+                  <p className="font-semibold text-white">
+                    {Math.floor(health.uptime / 60)} min
+                  </p>
                 </div>
               </div>
             ) : null}
@@ -156,7 +170,7 @@ function App() {
             <h2 className="text-lg lg:text-xl font-semibold text-cyan-400 mb-4 flex items-center gap-2">
               <span className="text-2xl">📡</span> API Information
             </h2>
-            
+
             {loading ? (
               <div className="flex items-center gap-3 text-slate-400">
                 <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
@@ -170,18 +184,27 @@ function App() {
               <div className="space-y-3">
                 <div className="flex justify-between items-center py-2 border-b border-white/5">
                   <span className="text-slate-400">Service</span>
-                  <span className="text-white font-medium">{apiInfo.service}</span>
+                  <span className="text-white font-medium">
+                    {apiInfo.service}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-white/5">
                   <span className="text-slate-400">Version</span>
-                  <span className="text-white font-medium">{apiInfo.version}</span>
+                  <span className="text-white font-medium">
+                    {apiInfo.version}
+                  </span>
                 </div>
                 <div className="pt-2">
                   <p className="text-slate-400 text-sm mb-3">Endpoints:</p>
                   <div className="grid grid-cols-1 gap-2">
                     {Object.entries(apiInfo.endpoints).map(([name, path]) => (
-                      <div key={name} className="bg-cyan-500/5 border border-cyan-500/10 rounded-lg px-3 py-2">
-                        <code className="text-cyan-400 text-sm">{name}: {path}</code>
+                      <div
+                        key={name}
+                        className="bg-cyan-500/5 border border-cyan-500/10 rounded-lg px-3 py-2"
+                      >
+                        <code className="text-cyan-400 text-sm">
+                          {name}: {path}
+                        </code>
                       </div>
                     ))}
                   </div>
@@ -195,15 +218,39 @@ function App() {
             <h2 className="text-lg lg:text-xl font-semibold text-cyan-400 mb-4 flex items-center gap-2">
               <span className="text-2xl">🛠️</span> Tech Stack
             </h2>
-            
+
             <div className="grid grid-cols-2 gap-3">
               {[
-                { icon: "⚛️", name: "React + TS", color: "from-cyan-500 to-blue-500" },
-                { icon: "🟢", name: "Node.js", color: "from-green-500 to-emerald-500" },
-                { icon: "🐳", name: "Docker", color: "from-blue-500 to-cyan-500" },
-                { icon: "☸️", name: "Kubernetes", color: "from-indigo-500 to-purple-500" },
-                { icon: "☁️", name: "Azure Cloud", color: "from-blue-400 to-sky-500" },
-                { icon: "🔐", name: "OpenID Auth", color: "from-orange-500 to-amber-500" },
+                {
+                  icon: "⚛️",
+                  name: "React + TS",
+                  color: "from-cyan-500 to-blue-500",
+                },
+                {
+                  icon: "🟢",
+                  name: "Node.js",
+                  color: "from-green-500 to-emerald-500",
+                },
+                {
+                  icon: "🐳",
+                  name: "Docker",
+                  color: "from-blue-500 to-cyan-500",
+                },
+                {
+                  icon: "☸️",
+                  name: "Kubernetes",
+                  color: "from-indigo-500 to-purple-500",
+                },
+                {
+                  icon: "☁️",
+                  name: "Azure Cloud",
+                  color: "from-blue-400 to-sky-500",
+                },
+                {
+                  icon: "🔐",
+                  name: "OpenID Auth",
+                  color: "from-orange-500 to-amber-500",
+                },
               ].map((tech) => (
                 <div
                   key={tech.name}
@@ -227,9 +274,7 @@ function App() {
         <p className="text-slate-400 text-sm">
           MindX Onboarding Program - Week 1 Challenge
         </p>
-        <p className="text-cyan-400 font-semibold mt-1">
-          By Phuc Do
-        </p>
+        <p className="text-cyan-400 font-semibold mt-1">By Phuc Do</p>
       </footer>
     </div>
   );

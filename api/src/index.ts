@@ -4,9 +4,26 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
+import * as appInsights from "applicationinsights";
 
 // Load environment variables
 dotenv.config();
+
+// Initialize Azure Application Insights
+if (process.env.APPLICATIONINSIGHTS_CONNECTION_STRING) {
+  appInsights
+    .setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING)
+    .setAutoDependencyCorrelation(true)
+    .setAutoCollectRequests(true)
+    .setAutoCollectPerformance(true, true)
+    .setAutoCollectExceptions(true)
+    .setAutoCollectDependencies(true)
+    .setAutoCollectConsole(true, true)
+    .setUseDiskRetryCaching(true)
+    .setSendLiveMetrics(true)
+    .start();
+  console.log("✅ Azure Application Insights initialized");
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -201,6 +218,13 @@ app.get("/auth/callback", async (req: Request, res: Response) => {
   const { code, state } = req.query;
 
   if (!code) {
+    // Track failed auth attempt
+    if (appInsights.defaultClient) {
+      appInsights.defaultClient.trackEvent({
+        name: "AuthCallback_NoCode",
+        properties: { state: state as string },
+      });
+    }
     return res.redirect(`${OIDC_CONFIG.frontendUrl}?error=no_code`);
   }
 
@@ -244,9 +268,24 @@ app.get("/auth/callback", async (req: Request, res: Response) => {
       ...(state && { state: state as string }),
     });
 
+    // Track successful login
+    if (appInsights.defaultClient) {
+      appInsights.defaultClient.trackEvent({
+        name: "UserLogin_Success",
+        properties: { hasIdToken: !!tokens.id_token },
+      });
+    }
+
     res.redirect(`${OIDC_CONFIG.frontendUrl}/callback?${params.toString()}`);
   } catch (error) {
     console.error("Auth callback error:", error);
+    // Track auth error
+    if (appInsights.defaultClient) {
+      appInsights.defaultClient.trackException({
+        exception: error as Error,
+        properties: { endpoint: "auth/callback" },
+      });
+    }
     res.redirect(`${OIDC_CONFIG.frontendUrl}?error=callback_failed`);
   }
 });

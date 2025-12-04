@@ -2,12 +2,12 @@
 
 ## Azure Resources
 
-| Resource | Name | Region |
-|----------|------|--------|
-| Resource Group | `mindx-onboarding-phucdh` | Japan East |
-| AKS Cluster | `mindx-phucdh-aks` | Japan East |
-| Container Registry | `mindxphucdhacr` | Japan East |
-| Domain | `phucdh.mindx.com.vn` | - |
+| Resource           | Name                      | Region     |
+| ------------------ | ------------------------- | ---------- |
+| Resource Group     | `mindx-onboarding-phucdh` | Japan East |
+| AKS Cluster        | `mindx-phucdh-aks`        | Japan East |
+| Container Registry | `mindxphucdhacr`          | Japan East |
+| Domain             | `phucdh.mindx.com.vn`     | -          |
 
 ## Step-by-Step Deployment
 
@@ -76,16 +76,16 @@ kubectl get certificate
 
 ## Kubernetes Resources
 
-| Resource | Name | Purpose |
-|----------|------|---------|
-| Deployment | `mindx-api` | Backend API pods |
-| Deployment | `mindx-web` | Frontend pods |
-| Service | `mindx-api` | API ClusterIP service |
-| Service | `mindx-web` | Web ClusterIP service |
-| Ingress | `mindx-ingress` | External access + TLS |
-| Secret | `oidc-credentials` | OIDC client credentials |
-| ClusterIssuer | `letsencrypt-prod` | Let's Encrypt issuer |
-| Certificate | `phucdh-mindx-tls` | TLS certificate |
+| Resource      | Name               | Purpose                 |
+| ------------- | ------------------ | ----------------------- |
+| Deployment    | `mindx-api`        | Backend API pods        |
+| Deployment    | `mindx-web`        | Frontend pods           |
+| Service       | `mindx-api`        | API ClusterIP service   |
+| Service       | `mindx-web`        | Web ClusterIP service   |
+| Ingress       | `mindx-ingress`    | External access + TLS   |
+| Secret        | `oidc-credentials` | OIDC client credentials |
+| ClusterIssuer | `letsencrypt-prod` | Let's Encrypt issuer    |
+| Certificate   | `phucdh-mindx-tls` | TLS certificate         |
 
 ## Updating Deployments
 
@@ -108,6 +108,7 @@ kubectl rollout undo deployment/mindx-web
 ## Troubleshooting
 
 ### Check pod status
+
 ```powershell
 kubectl get pods
 kubectl describe pod <pod-name>
@@ -115,18 +116,21 @@ kubectl logs <pod-name>
 ```
 
 ### Check certificate status
+
 ```powershell
 kubectl get certificate
 kubectl describe certificate phucdh-mindx-tls
 ```
 
 ### Restart deployments
+
 ```powershell
 kubectl rollout restart deployment/mindx-api
 kubectl rollout restart deployment/mindx-web
 ```
 
 ### View ingress
+
 ```powershell
 kubectl describe ingress mindx-ingress
 ```

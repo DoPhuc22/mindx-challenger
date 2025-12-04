@@ -32,7 +32,11 @@ const Dashboard = () => {
             <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-gradient-to-br from-cyan-400 via-emerald-400 to-purple-500 p-[2px] shadow-lg shadow-cyan-500/20">
               <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
                 {user.picture ? (
-                  <img src={user.picture} alt="Avatar" className="w-full h-full object-cover" />
+                  <img
+                    src={user.picture}
+                    alt="Avatar"
+                    className="w-full h-full object-cover"
+                  />
                 ) : (
                   <span className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
                     {(user.name || user.email || "U")[0].toUpperCase()}
@@ -52,13 +56,17 @@ const Dashboard = () => {
             {user.given_name && (
               <div className="flex justify-between items-center py-2 border-b border-white/5">
                 <span className="text-slate-500 text-sm">First Name</span>
-                <span className="text-white font-medium">{user.given_name}</span>
+                <span className="text-white font-medium">
+                  {user.given_name}
+                </span>
               </div>
             )}
             {user.family_name && (
               <div className="flex justify-between items-center py-2 border-b border-white/5">
                 <span className="text-slate-500 text-sm">Last Name</span>
-                <span className="text-white font-medium">{user.family_name}</span>
+                <span className="text-white font-medium">
+                  {user.family_name}
+                </span>
               </div>
             )}
             <div className="flex justify-between items-center py-2">
@@ -75,7 +83,7 @@ const Dashboard = () => {
           <h3 className="text-lg font-semibold text-cyan-400 mb-4 flex items-center gap-2">
             <span>🔑</span> Access Token
           </h3>
-          
+
           <div className="bg-black/40 rounded-lg p-4 mb-4 border border-white/5">
             <code className="text-slate-400 text-xs break-all leading-relaxed block max-h-32 overflow-y-auto">
               {accessToken ? `${accessToken.substring(0, 120)}...` : "No token"}
@@ -85,9 +93,10 @@ const Dashboard = () => {
           <button
             onClick={copyToken}
             className={`w-full py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2
-              ${copied 
-                ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" 
-                : "bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20"
+              ${
+                copied
+                  ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                  : "bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20"
               }`}
           >
             {copied ? (
@@ -110,8 +119,16 @@ const Dashboard = () => {
 
           <div className="space-y-3">
             {[
-              { method: "GET", path: "/api/profile", desc: "User profile data" },
-              { method: "GET", path: "/auth/userinfo", desc: "Token validation" },
+              {
+                method: "GET",
+                path: "/api/profile",
+                desc: "User profile data",
+              },
+              {
+                method: "GET",
+                path: "/auth/userinfo",
+                desc: "Token validation",
+              },
             ].map((endpoint) => (
               <div
                 key={endpoint.path}
@@ -133,7 +150,10 @@ const Dashboard = () => {
           <div className="mt-4 p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
             <p className="text-amber-400 text-xs flex items-start gap-2">
               <span>💡</span>
-              <span>These endpoints require a valid access token in the Authorization header.</span>
+              <span>
+                These endpoints require a valid access token in the
+                Authorization header.
+              </span>
             </p>
           </div>
         </div>

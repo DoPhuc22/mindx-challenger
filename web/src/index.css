@@ -8,12 +8,12 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
+
   body {
     @apply bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 min-h-screen text-white overflow-x-hidden;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-family: "Inter", "Segoe UI", sans-serif;
   }
-  
+
   #root {
     @apply w-full min-h-screen;
   }
@@ -25,58 +25,59 @@
     @apply hover:border-cyan-400/30 hover:shadow-lg hover:shadow-cyan-400/10;
     @apply transition-all duration-300;
   }
-  
+
   .glass-card-hover {
     @apply hover:-translate-y-1 hover:scale-[1.02];
   }
-  
+
   .gradient-text {
     @apply bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent;
     background-size: 200% auto;
     animation: gradient 3s ease infinite;
   }
-  
+
   .gradient-border {
     @apply relative;
   }
-  
+
   .gradient-border::before {
-    content: '';
+    content: "";
     @apply absolute inset-0 rounded-2xl p-[1px];
     background: linear-gradient(135deg, #00d9ff, #00ff88, #a855f7, #00d9ff);
     background-size: 300% 300%;
     animation: gradient 4s ease infinite;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
   }
-  
+
   .btn-primary {
     @apply px-6 py-3 rounded-full font-semibold;
     @apply bg-gradient-to-r from-cyan-400 to-emerald-400 text-slate-900;
     @apply hover:shadow-lg hover:shadow-cyan-400/50 hover:scale-105;
     @apply active:scale-95 transition-all duration-300;
   }
-  
+
   .btn-outline {
     @apply px-4 py-2 rounded-full font-medium;
     @apply border border-red-400 text-red-400;
     @apply hover:bg-red-400/20 transition-all duration-300;
   }
-  
+
   .status-badge {
     @apply px-3 py-1 rounded-full text-sm font-medium;
   }
-  
+
   .status-healthy {
     @apply bg-emerald-500/20 text-emerald-400 border border-emerald-400/30;
   }
-  
+
   .status-error {
     @apply bg-red-500/20 text-red-400 border border-red-400/30;
   }
-  
+
   .code-block {
     @apply font-mono text-sm bg-black/40 rounded-lg p-4;
     @apply border border-white/5 overflow-x-auto;
@@ -84,6 +85,11 @@
 }
 
 @keyframes gradient {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }

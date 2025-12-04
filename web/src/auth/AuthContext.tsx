@@ -5,6 +5,7 @@ import {
   useContext,
   type ReactNode,
 } from "react";
+import { trackLogin, trackLogout, setUserId, trackError } from "../utils/analytics";
 
 // Types
 interface User {
@@ -121,12 +122,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (response.ok) {
         const userInfo = await response.json();
         setUser(userInfo);
+        // Track successful login and set user ID for GA
+        trackLogin("MindX_OpenID");
+        if (userInfo.sub) {
+          setUserId(userInfo.sub);
+        }
       } else {
         // Token invalid, clear storage
         localStorage.removeItem("access_token");
         localStorage.removeItem("id_token");
         setAccessToken(null);
         setUser(null);
+        trackError("auth", "Token validation failed");
       }
     } catch (error) {
       console.error("Failed to fetch user info:", error);
@@ -134,6 +141,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.removeItem("id_token");
       setAccessToken(null);
       setUser(null);
+      trackError("auth", "Failed to fetch user info");
     }
   };
 
@@ -160,6 +168,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = () => {
+    // Track logout event
+    trackLogout();
+    
     // Clear local storage
     localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");

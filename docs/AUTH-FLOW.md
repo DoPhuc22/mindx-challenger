@@ -4,12 +4,12 @@
 
 This application uses **OpenID Connect (OIDC)** with MindX Identity Provider for authentication.
 
-| Component | Value |
-|-----------|-------|
-| Identity Provider | `https://id-dev.mindx.edu.vn` |
-| Client ID | `mindx-onboarding` |
-| Authorization Flow | Authorization Code Flow |
-| Token Type | Opaque Token |
+| Component          | Value                         |
+| ------------------ | ----------------------------- |
+| Identity Provider  | `https://id-dev.mindx.edu.vn` |
+| Client ID          | `mindx-onboarding`            |
+| Authorization Flow | Authorization Code Flow       |
+| Token Type         | Opaque Token                  |
 
 ## Authentication Flow Diagram
 
@@ -61,14 +61,14 @@ Since MindX ID returns **opaque tokens** (not JWTs), the backend validates token
 async function verifyTokenViaUserInfo(accessToken: string) {
   const response = await fetch(`${OIDC_ISSUER_URL}/connect/userinfo`, {
     headers: {
-      'Authorization': `Bearer ${accessToken}`
-    }
+      Authorization: `Bearer ${accessToken}`,
+    },
   });
-  
+
   if (!response.ok) {
-    throw new Error('Invalid token');
+    throw new Error("Invalid token");
   }
-  
+
   return await response.json();
 }
 ```
@@ -76,19 +76,21 @@ async function verifyTokenViaUserInfo(accessToken: string) {
 ## API Endpoints
 
 ### Public Endpoints
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/health` | Health check |
-| GET | `/api/info` | API information |
-| GET | `/api/hello` | Hello endpoint |
-| GET | `/auth/config` | OIDC configuration for frontend |
-| GET | `/auth/callback` | OIDC callback handler |
+
+| Method | Path             | Description                     |
+| ------ | ---------------- | ------------------------------- |
+| GET    | `/health`        | Health check                    |
+| GET    | `/api/info`      | API information                 |
+| GET    | `/api/hello`     | Hello endpoint                  |
+| GET    | `/auth/config`   | OIDC configuration for frontend |
+| GET    | `/auth/callback` | OIDC callback handler           |
 
 ### Protected Endpoints (Require Authentication)
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/profile` | Get user profile |
-| GET | `/auth/userinfo` | Get user info from token |
+
+| Method | Path             | Description              |
+| ------ | ---------------- | ------------------------ |
+| GET    | `/api/profile`   | Get user profile         |
+| GET    | `/auth/userinfo` | Get user info from token |
 
 ## Frontend Auth Context
 
